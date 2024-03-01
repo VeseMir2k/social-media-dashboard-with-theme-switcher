@@ -18,6 +18,7 @@ Users should be able to:
 ### Built with
 
 - Semantic HTML5 markup
+- BEM
 - CSS custom properties
 - Flexbox
 - CSS Grid
