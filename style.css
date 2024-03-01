@@ -12,11 +12,12 @@
   --toogle-text: hsl(230, 12%, 44%);
   --toggle: hsl(230, 22%, 74%);
 
-  --white: hsl(0, 0%, 100%);
-  --very-pale-blue: hsl(225, 100%, 98%);
-  --light-grayish-blue: hsl(227, 47%, 96%);
-  --dark-grayish-blue: hsl(230, 12%, 44%);
-  --very-dark-blue: hsl(230, 17%, 14%);
+  --background-main: hsl(0, 0%, 100%);
+  --background-pattern: hsl(225, 100%, 98%);
+  --background-card: hsl(227, 47%, 96%);
+  --background-card-hover: hsl(228, 33%, 91%);
+  --text-color-1: hsl(228, 12%, 44%);
+  --text-color-2: hsl(230, 17%, 14%);
 }
 
 * {
@@ -27,8 +28,8 @@
 
 body {
   position: relative;
-  background-color: var(--white);
-  color: var(--dark-grayish-blue);
+  background: var(--background-main);
+  color: var(--text-color-1);
   font-weight: 700;
   font-size: 12px;
   font-family: "Inter", sans-serif;
@@ -41,7 +42,7 @@ body::after {
   left: 0;
   z-index: -1;
   border-radius: 0 0 20px 20px;
-  background-color: var(--very-pale-blue);
+  background: var(--background-pattern);
   height: 235px;
   content: "";
 }
@@ -53,11 +54,12 @@ body::after {
     hsl(210, 78%, 56%),
     hsl(146, 68%, 55%)
   );
-  --white: hsl(230, 17%, 14%);
-  --very-pale-blue: hsl(232, 19%, 15%);
-  --light-grayish-blue: hsl(228, 28%, 20%);
-  --dark-grayish-blue: hsl(228, 34%, 66%);
-  --very-dark-blue: hsl(0, 0%, 100%);
+  --background-main: hsl(230, 17%, 14%);
+  --background-pattern: hsl(232, 19%, 15%);
+  --background-card: hsl(228, 28%, 20%);
+  --background-card-hover: hsl(228, 25%, 27%);
+  --text-color-1: hsl(228, 34%, 66%);
+  --text-color-2: hsl(0, 0%, 100%);
 }
 
 .icon {
@@ -79,7 +81,7 @@ body::after {
 /* Header */
 .header__title {
   margin-bottom: 4px;
-  color: var(--very-dark-blue);
+  color: var(--text-color-2);
   font-size: 24px;
 }
 
@@ -87,7 +89,7 @@ body::after {
 .divider {
   margin: 24px 0 16px;
   border: none;
-  border-bottom: 1px solid var(--dark-grayish-blue);
+  border-bottom: 1px solid var(--text-color-1);
 }
 
 /* Dark mode */
@@ -109,15 +111,15 @@ body::after {
 }
 
 .dark-mode__toggle-switch {
-  margin: 3px;
   position: absolute;
   top: 0;
   left: 0;
+  transition: left 0.2s ease-in;
+  margin: 3px;
   border-radius: 50%;
-  background: var(--light-grayish-blue);
+  background: var(--background-card);
   width: 18px;
   height: 18px;
-  transition: left 0.2s ease-in;
 }
 
 .active > .dark-mode__toggle-switch {
@@ -134,15 +136,16 @@ body::after {
   display: flex;
   flex-direction: column;
   align-items: center;
+  transition: background 0.2s ease;
+  cursor: pointer;
   border-radius: 5px;
-  background: var(--light-grayish-blue);
+  background: var(--background-card);
   padding: 32px 0 24px;
   width: 100%;
-  transition: background 0.2s ease-in;
 }
 
 .card:hover {
-  background: var(--dark-grayish-blue);
+  background: var(--background-card-hover);
 }
 
 .card-facebook {
@@ -154,13 +157,22 @@ body::after {
 }
 
 .card-instagram {
+  position: relative;
+  z-index: 1;
+}
+
+.card-instagram::before {
+  position: absolute;
+  top: 0;
+  left: 0;
+  z-index: 2;
   border-top: 4px solid transparent;
-  background: linear-gradient(
-        var(--light-grayish-blue),
-        var(--light-grayish-blue)
-      )
+  border-radius: 5px 5px 0 0;
+  background: linear-gradient(var(--background-card), var(--background-card))
       padding-box,
     var(--instagram) border-box;
+  width: 100%;
+  content: "";
 }
 
 .card-youtube {
@@ -184,7 +196,7 @@ body::after {
 
 .card__sum {
   margin-bottom: 9px;
-  color: var(--very-dark-blue);
+  color: var(--text-color-2);
   font-size: 56px;
   line-height: 48px;
   letter-spacing: -2px;
@@ -213,7 +225,7 @@ body::after {
 
 .card-today-container__title {
   margin-bottom: 10px;
-  color: var(--very-dark-blue);
+  color: var(--text-color-2);
   font-size: 24px;
 }
 
@@ -221,8 +233,15 @@ body::after {
   display: grid;
   grid-template-columns: 1fr 1fr;
   row-gap: 21px;
-  background-color: var(--light-grayish-blue);
+  transition: background 0.2s ease;
+  cursor: pointer;
+  background: var(--background-card);
   padding: 24px;
+  border-radius: 5px;
+}
+
+.card-today:hover {
+  background: var(--background-card-hover);
 }
 
 .card-today__icon {
@@ -230,7 +249,7 @@ body::after {
 }
 
 .card-today__sum {
-  color: var(--very-dark-blue);
+  color: var(--text-color-2);
   font-size: 32px;
 }
 
@@ -243,6 +262,10 @@ body::after {
 
 .card-today__sum-percent {
   margin-left: 3px;
+}
+
+.footer {
+  padding: 5px 0;
 }
 
 .attribution {
